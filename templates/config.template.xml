@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  config.xml
+  -
+  this xml file is copied to the cordova project on build
+  when changing, edit the one in project root, not in build dir
+-->
+<widget id="<%= packageName %>"
+    version="<%= version %>"
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name><%= appName %></name>
+  <description><%= appDescription %></description>
+  <author email="justin.lorenzon@ehealthnigeria.org" href="http://ehealthafrica.org/">eHealth Africa</author>
+  <content src="index.html"/>
+
+  <preference name="android-minSdkVersion" value="14"/>
+  <!-- comes from cca -->
+  <preference name="KeyboardShrinksView" value="true" />
+  <preference name="StatusBarOverlaysWebView" value="false" />
+  <preference name="StatusBarBackgroundColor" value="#000000" />
+  <preference name="iosPersistentFileLocation" value="Library" />
+  <preference name="AndroidPersistentFileLocation" value="Internal" />
+  <!-- crosswalk version, please see:
+    - https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview
+    - https://download.01.org/crosswalk/releases/crosswalk/android/maven2
+
+    seems 11.40 is the best one at the moment
+    the beta was flickering on the nvidia tablet (even though it was the better one
+    on the samsung tablet)
+  -->
+  <preference name="xwalkversion" value="org.xwalk:xwalk_core_library:11.40.277.7" />
+
+  <!--
+  access control needs to be duplicated in the CSP meta tag in index.html
+  see https://github.com/apache/cordova-plugin-whitelist#content-security-policy
+  -->
+  <access origin="http://localhost:5984/*"/>
+  <icon src="www/images/app-biometrics-144.png" width="144" height="144" density="xhdpi" />
+
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+</widget>
+
+
+
+
