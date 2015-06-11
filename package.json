@@ -1,0 +1,16 @@
+{
+  "name": "eha-cordova-build",
+  "version": "1.0.0",
+  "description": "Builds Sense Apps via Cordova",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "scripts/install.sh"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova": "^5.0.0",
+    "cordova-android": "^4.0.0"
+  }
+}
