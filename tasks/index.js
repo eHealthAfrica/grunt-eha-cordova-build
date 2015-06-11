@@ -2,7 +2,7 @@
 'use strict';
 
 var exec = require('child_process').exec;
-
+var util = require('util')
 var fs = require('fs');
 var path = require('path');
 var walk = function(dir, done) {
@@ -42,13 +42,21 @@ module.exports = function(grunt) {
     var done = this.async();
     var data = this.options();
 
+    var interpolators = util._extend({
+      type: type,
+      country: country
+    }, data);
+
+    grunt.template.addDelimiters('handlebars', '{%', '%}')
+    var pkg = grunt.template.process(data.package, { data: interpolators, delimiters: 'handlebars' });
+    var buildCmd = grunt.template.process(data.buildCmd, { data: interpolators, delimiters: 'handlebars' });
+
     var cmd = path.resolve(process.cwd(), __dirname + '/../scripts/build.sh');
-    console.log(cmd);
-    var env = require('util')._extend({
+    var env = util._extend({
       APPDIR:   data.appdir,
-      PACKAGE:  data.package,
+      PACKAGE:  pkg,
       APPNAME:  data.appname,
-      COMMAND:  data.buildCmd
+      COMMAND:  buildCmd
     }, process.env);
 
     exec(cmd + " " + type + " " + country + " " + rebuild, {
