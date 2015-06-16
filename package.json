@@ -1,5 +1,5 @@
 {
-  "name": "eha-cordova-build",
+  "name": "grunt-eha-cordova-build",
   "version": "1.0.0",
   "description": "Builds Sense Apps via Cordova",
   "main": "index.js",
