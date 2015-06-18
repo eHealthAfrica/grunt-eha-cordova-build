@@ -12,7 +12,7 @@
     xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name><%= appName %></name>
   <description><%= appDescription %></description>
-  <author email="justin.lorentzon@ehealthnigeria.org" href="http://ehealthafrica.org/">eHealth Africa</author>
+  <author email="justin.lorenzon@ehealthnigeria.org" href="http://ehealthafrica.org/">eHealth Africa</author>
   <content src="index.html"/>
 
   <preference name="android-minSdkVersion" value="14"/>
