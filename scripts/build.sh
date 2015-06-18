@@ -6,13 +6,13 @@ app="$APPDIR"
 package="$PACKAGE"
 appname="$APPNAME"
 gruntcmd="$COMMAND"
+version="$VERSION"
 
 scriptdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cordova="$scriptdir/../node_modules/.bin/cordova"
 keys="$pwd/.android"
 build="$pwd/build"
 apks="$build/$app/platforms/android/build/outputs/apk"
-version=$(<app/VERSION)
 
 have() { command -v "$1" >/dev/null; }
 info() { echo "$0: $1"; }
@@ -95,16 +95,25 @@ $buildcmd
 
 [[ "$type" == "snapshot" ]] && releasetype="debug" || releasetype="release"
 
+if [[ "$country" == "undefined" ]]; then
+    country= ""
+else
+    country="$country-"
+fi
+
+# cause i suck at bash / karl
+latest="latest"
+
 for i in armv7 x86; do
   if [[ -e "$apks/android-$i-$releasetype.apk" ]]; then
-    mv "$apks/android-$i-$releasetype.apk" "$build/$app-$i-$type-$country-$version.apk"
-    cp "$build/$app-$i-$type-$country-$version.apk" "$build/$app-$i-$type-$country-latest.apk"
+    mv "$apks/android-$i-$releasetype.apk" "$build/$app-$i-$type-$country$version.apk"
+    cp "$build/$app-$i-$type-$country$version.apk" "$build/$app-$i-$type-$country$latest.apk"
   fi
 done
 
 if [[ -e "$apks/android-$releasetype.apk" ]]; then
-  mv "$apks/android-$ccaname.apk" "$build/$app-$type-$country-$version.apk"
-  cp "$build/$app-$type-$country-$version.apk" "$build/$app-$type-$country-latest.apk"
+  mv "$apks/android-$ccaname.apk" "$build/$app-$type-$country$version.apk"
+  cp "$build/$app-$type-$country$version.apk" "$build/$app-$type-$country$latest.apk"
 fi
 
 info "apks are in $build"

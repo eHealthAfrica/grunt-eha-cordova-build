@@ -57,7 +57,8 @@ module.exports = function(grunt) {
       APPDIR:   data.appdir,
       PACKAGE:  pkg,
       APPNAME:  data.appname,
-      COMMAND:  buildCmd
+      COMMAND:  buildCmd,
+      VERSION:  version
     }, process.env);
 
     exec(cmd + " " + type + " " + country + " " + rebuild, {
