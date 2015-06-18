@@ -2,7 +2,7 @@
 'use strict';
 
 var exec = require('child_process').exec;
-var util = require('util')
+var util = require('util');
 var fs = require('fs');
 var path = require('path');
 var walk = function(dir, done) {
@@ -41,13 +41,14 @@ module.exports = function(grunt) {
   grunt.registerTask('ehaCordovaBuild', function(type, country, rebuild) {
     var done = this.async();
     var data = this.options();
+    var version = grunt.file.readJSON('package.json').version;
 
     var interpolators = util._extend({
       type: type,
       country: country
     }, data);
 
-    grunt.template.addDelimiters('handlebars', '{%', '%}')
+    grunt.template.addDelimiters('handlebars', '{%', '%}');
     var pkg = grunt.template.process(data.package, { data: interpolators, delimiters: 'handlebars' });
     var buildCmd = grunt.template.process(data.buildCmd, { data: interpolators, delimiters: 'handlebars' });
 
@@ -63,8 +64,8 @@ module.exports = function(grunt) {
       cwd: process.cwd(),
       env: env
     }, function(err, stdout, stderr) {
-      console.log('got err', err, stdout, stderr);
       if(err) {
+        console.log('got err', err, stdout, stderr);
         return grunt.fatal(err);
       }
 
@@ -114,8 +115,18 @@ module.exports = function(grunt) {
   grunt.registerTask('ehaCordovaPlugins', function(buildDir) {
     // Loops over cordova plugins from project_root/plugins.json and installs them
     var done = this.async();
-    var plugins = grunt.file.readJSON('cordova-plugins.json');
-    var packages = plugins.packages;
+    var plugins = grunt.file.readJSON('package.json').cordovaPlugins || {};
+    if(Object.keys(plugins).length === 0) {
+      grunt.log.writeln('No Plugins Found, add them in cordovaPlugins in package.json');
+    }
+
+    var packages = Object.keys(plugins).map(function(key) {
+      if(/github\.com/.test(plugins[key])) {
+        return plugins[key];
+      }
+
+      return key + "@" + plugins[key];
+    });
 
     (function next(err) {
       if(err) {
