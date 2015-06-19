@@ -96,7 +96,7 @@ $buildcmd
 [[ "$type" == "snapshot" ]] && releasetype="debug" || releasetype="release"
 
 if [[ "$country" == "undefined" ]]; then
-    country= ""
+    country=""
 else
     country="$country-"
 fi
