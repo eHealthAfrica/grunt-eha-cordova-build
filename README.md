@@ -10,9 +10,9 @@ Set Up:
 so each app can chose different versions shuold they want to.
 `npm install --save-dev cordova-android`
 
-3. Generate the cordova-plugins.json config.template.xml, and app/VERSION files:
+3. Generate the config.template.xml file:
 `grunt ehaCordovaTemplate`
-Modify config.template.xml, cordova-plugins.json and app/VERSION after your needs. **those files should be checked in in your version control**.
+Modify config.template.xml after your needs. **this file should be checked in in your version control**.
 
 4. In your gruntfile, add
 ```
@@ -24,6 +24,7 @@ Modify config.template.xml, cordova-plugins.json and app/VERSION after your need
         appdir: 'build-test',
         package: 'com.ehealthafrica.{%= country %}.buildtest',
         appname: 'Build Test',
+        // Adapt this to what your apps build system is
         buildCmd: 'grunt build:{%=type%}:{%=country%}:{%=rebuild%}'
       }
     }
@@ -48,8 +49,45 @@ Note that you need to use different delimiters, to get past the grunt initial ex
 
 6. build with `grunt ehaCordovaBuild:snapshot:country`
 
+### Cordova Plugins
 
-### Version
+Cordova plugins are installed via a 'cordovaPlugins' key in package.json. See example above.
+
+### App Version
 
 The app version is read from package.json
+
+### Travis Build
+
+This module does not provide you with a travis build script. However, here's an example:
+
+
+```bash
+set -e
+
+info() { echo "$0: $1"; }
+error() { info "$1"; exit 1; }
+build() { info "Performing $1 build"; }
+skip() { info "${1}. Skipping build."; exit 0; }
+
+[[ "$TRAVIS_PULL_REQUEST" == "false" ]] || {
+  skip "This build was triggered by a pull request"
+}
+
+if [[ "$TRAVIS_TAG" ]]; then
+  BUILD_STAGE="release"
+elif [[ "$TRAVIS_BRANCH" == "develop" ]]; then
+  BUILD_STAGE="snapshot"
+else
+  skip "Unsupported branch $TRAVIS_BRANCH and/or untagged commit"
+fi
+
+# Only build sl right now
+grunt ehaCordovaBuild:$BUILD_STAGE:sl
+
+# throw away app directory, we just want the APKs
+rm -Rf build/biometrics
+```
+
+Note that the deletion of the bottom needs to be the same as the 'appdir' grunt option for ehaCordovaBuild
 
