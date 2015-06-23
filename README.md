@@ -4,7 +4,7 @@ Cordova Build Module:
 Set Up:
 
 1. Install this module:
-`npm install --save-dev eHealthAfrica/eha-cordova-build`
+`npm install --save-dev grunt-eha-cordova-build`
 
 2. Install cordova-android platform. This is done locally,
 so each app can chose different versions shuold they want to.
