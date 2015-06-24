@@ -112,7 +112,7 @@ for i in armv7 x86; do
 done
 
 if [[ -e "$apks/android-$releasetype.apk" ]]; then
-  mv "$apks/android-$ccaname.apk" "$build/$app-$type-$country$version.apk"
+  mv "$apks/android-$releasetype.apk" "$build/$app-$type-$country$version.apk"
   cp "$build/$app-$type-$country$version.apk" "$build/$app-$type-$country$latest.apk"
 fi
 
