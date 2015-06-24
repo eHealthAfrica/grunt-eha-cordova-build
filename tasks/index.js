@@ -61,7 +61,7 @@ module.exports = function(grunt) {
       VERSION:  version
     }, process.env);
 
-    exec(cmd + " " + type + " " + country + " " + rebuild, {
+    var child = exec(cmd + " " + type + " " + country + " " + rebuild, {
       cwd: process.cwd(),
       env: env
     }, function(err, stdout, stderr) {
@@ -71,6 +71,10 @@ module.exports = function(grunt) {
       }
 
       done();
+    });
+
+    child.stdout.on('data', function(message) {
+      grunt.log.write(message.toString());
     });
   });
 
