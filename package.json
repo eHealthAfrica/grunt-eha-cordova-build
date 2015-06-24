@@ -1,15 +1,24 @@
 {
   "name": "grunt-eha-cordova-build",
-  "version": "2.0.1",
+  "version": "0.0.0-semantically-released",
   "description": "Builds Sense Apps via Cordova",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo the grass so little has to do",
+    "prepublish": "semantic-release pre",
+    "postpublish": "semantic-release post"
   },
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
     "cordova": "^5.0.0",
     "cordova-android": "^4.0.0"
+  },
+  "devDependencies": {
+    "semantic-release": "^3.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eHealthAfrica/grunt-eha-cordova-build"
   }
 }
