@@ -31,6 +31,7 @@ Modify config.template.xml after your needs. **this file should be checked in in
   });
 ```
 Note that you need to use different delimiters, to get past the grunt initial expansion.
+**See more info about the 'buildCmd' below**
 
 5. Add a `cordovaPlugins` key in package.json, example
 ```
@@ -56,6 +57,11 @@ Cordova plugins are installed via a 'cordovaPlugins' key in package.json. See ex
 ### App Version
 
 The app version is read from package.json
+
+### The 'buildCmd'
+
+The 'buildCmd' property could be any bash command, that produces a 'dist' directory in your root folder.
+The simplest possible would be `cp -r app dist`. As long as it produces this directory, it can also be grunt commands, or whatever you want to use.
 
 ### Travis Build
 
