@@ -1,0 +1,23 @@
+sudo: false
+language: node_js
+node_js:
+- '0.10'
+cache:
+  directories:
+  - node_modules
+notifications:
+  email: false
+before_deploy:
+- npm config set spin false --global
+env:
+  global:
+    secure: WzOnEFuHKhI3ryN6MxeA/UMTCZQrNEfs2tpDB1NrKHhzpRLBgxj+ERBZLsMF5OJNCb8o77D5WxMgRvrDHh9mmOvJh/gUg7KJoM5DXjFEqm39WTOl1Ws9lWPq+DxjK/GVWb/JeByIadsMsQy94wwzYSV9ud/CwCwdwxzWQYTqoTei0n9DEuRSNb3X/hxI1h0rKOAnaEtfrxYUV4wkxSO5NxZI4YETs1TClU8AgxuQw2Ml0V4JzwUI+rydHGNIt4nm27Wi1b5f1iefUOjFSutdG6b6Cc0JHlNvnoD75TCRXIOa3WUAcp1zaqE/x6oLBo7YpIlGlVp7b1KpMXsJy3G8b0WLHZljuD1BXIFPUtO5pKjodFqPprqkbINpJ1hjxa5m6IVm+4IlfMcQD1tRXzqchPHuo+6J+r3u8AUfnFZLNB1jTwbr3Ahw/bQsvJFkY4oZG3/Wxqfo91zemnl6uQPs0DHVaCM6RlnofQgxAYr309ndKmECggWFZUimRJul1v/tsB//DK3Vn/7ckfV8zY6K7aREOVHLFL6IMnJNUxjcouj9YaQ3oDsQ267LHdRAkXjOYE41J4J7T5U2rGqwE57Q4Xwky5M01aGOluGI/zIISATo0iK/pmPwXImr6TOQ07Qfav0Ybh4/tOwou2xn7EPgURjK2UbZ3/H1XuZs0WN4Voo=
+deploy:
+  provider: npm
+  email: oss@ehealthafrica.org
+  skip_cleanup: true
+  api_key:
+    secure: h1P8k50YK7D7BW0Z6HLmcwxdCeDvjQx86j975ns1PzobC/tRfoiFUndqQXVzhsKOOvkkIlTAUClRme6LvYSnH1f/oZPjJL9NgTPDiRUnbnJoFlVyGGpGgKgq0RB/KXdOQdb4WZcHFe1UH2k4YEts6sUu7S3Q5/FpNgjDUguSMNEy5ATvQLJNh1je070NR70DMr+efm33DtyEL51tl21GU8ovGmSHCTp2kb8u8GH96XOyHKS8tds2zaSj/l4vpvBP+Vah9knoXfmlt8H7iV2SgnYmkRsJsChHTLe9ioAx7ZJBXVe2Vf0LlVXReb1sMYYT1SrvCHHhXwL4WexpaFuj+gsimYOoFbUDpcInnkaPYLZHlKP7q3p5jwt4skw5XsCXo3+U5xzhoBoPBmTTeh5k+EUC0Ktif4ZPQhDaYGTdFQps0ANoplMAX4FF6UPc9kuf/Yj0sazAMBA+SUYzxqo0VT9lHR5/Bv2llaNn0eMps8cXUlhR0Rvo/BrjvoQb9lLvoewgsQPewa2F9OsCjAsZJqcBLuNRwjQY+ux7TQzK4+fTU818gU8xtJ4tfvDomur+hpNw9XbhDPMvqSP7EQeCFb8POhBVA9r2JWzhVXwv4iCiFrfDwYoPaMO9ZrzHbgnPavPALGuBGJuzVL8Sp0iqaK22PqKIPLQjd7mgIuM+rtc=
+  on:
+    branch: master
+    repo: eHealthAfrica/grunt-eha-cordova-build
