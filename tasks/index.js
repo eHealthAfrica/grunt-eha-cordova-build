@@ -115,12 +115,17 @@ module.exports = function(grunt) {
 
 
   // Copies config.xml to cordova build dir, sets package name after country
-  grunt.registerTask('ehaCordovaConfig', function(country, version, buildDir, pkg, appName) {
+  grunt.registerTask('ehaCordovaConfig', function(country, version, buildDir, pkg, appName, type) {
     var file = grunt.file.read('config.template.xml');
-    var processed = grunt.template.process(file, { data: {
-      country: country, version: version,
-      packageName: pkg, appName: appName
-    }});
+    var processed = grunt.template.process(file, {
+      data: {
+        country: country,
+        version: version,
+        packageName: pkg,
+        appName: appName,
+        type: type
+      }
+    });
     grunt.file.write(buildDir + '/config.xml', processed);
   });
 
