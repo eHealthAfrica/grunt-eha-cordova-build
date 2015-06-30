@@ -52,7 +52,6 @@ module.exports = function(grunt) {
 
     var processed = {};
     Object.keys(data).forEach(function(property) {
-      console.log(property);
       if (typeof data[property] === 'function') {
         processed[property] = data[property].call(this, interpolators);
       } else {
