@@ -59,7 +59,7 @@ if [[ $skipcreate == false ]]; then
   cd "$build"
   "$cordova" create "$app" "$package" "$appname" --link-to="$pwd/dist"
 
-  grunt ehaCordovaConfig:"$country:$version:$build/$app:$package:$appname"
+  grunt ehaCordovaConfig:"$country:$version:$build/$app:$package:$appname:$type"
 
   cd "$app"
   # Save country ref for checking rebuilds:
