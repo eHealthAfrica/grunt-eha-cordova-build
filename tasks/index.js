@@ -49,15 +49,23 @@ module.exports = function(grunt) {
     }, data);
 
     grunt.template.addDelimiters('handlebars', '{%', '%}');
-    var pkg = grunt.template.process(data.package, { data: interpolators, delimiters: 'handlebars' });
-    var buildCmd = grunt.template.process(data.buildCmd, { data: interpolators, delimiters: 'handlebars' });
+
+    var processed = {};
+    Object.keys(data).forEach(function(property) {
+      console.log(property);
+      if (typeof data[property] === 'function') {
+        processed[property] = data[property].call(this, interpolators);
+      } else {
+        processed[property] = grunt.template.process(data[property], { data: interpolators, delimiters: 'handlebars' });
+      }
+    });
 
     var cmd = path.resolve(process.cwd(), __dirname + '/../scripts/build.sh');
     var env = util._extend({
-      APPDIR:   data.appdir,
-      PACKAGE:  pkg,
-      APPNAME:  data.appname,
-      COMMAND:  buildCmd,
+      APPDIR:   processed.appdir,
+      PACKAGE:  processed.package,
+      APPNAME:  processed.appname,
+      COMMAND:  processed.buildCmd,
       VERSION:  version
     }, process.env);
 
