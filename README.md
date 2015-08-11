@@ -1,5 +1,11 @@
-Cordova Build Module:
------
+# grunt-eha-cordova-build
+
+[![Build Status][travis-image]][travis-url]
+
+[travis-image]: https://img.shields.io/travis/eHealthAfrica/grunt-eha-cordova-build.svg
+[travis-url]: https://travis-ci.org/eHealthAfrica/grunt-eha-cordova-build
+
+## Usage
 
 Set Up:
 
