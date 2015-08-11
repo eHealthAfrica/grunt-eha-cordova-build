@@ -17,11 +17,11 @@ apks="$build/$app/platforms/android/build/outputs/apk"
 have() { command -v "$1" >/dev/null; }
 info() { echo "$0: $1"; }
 error() { info "$1"; exit 1; }
-usage() { echo "usage: $0 snapshot|release country (optional rebuild)"; }
+usage() { echo "usage: $0 snapshot|staging|release country (optional rebuild)"; }
 
 [[ "$1" ]] || { usage; exit 1; }
 [[ "$1" == "--help" || "$1" == "-h" ]] && { usage; exit; }
-[[ "$1" != "snapshot" && "$1" != "release" ]] && { usage; exit 1; }
+[[ "$1" != "snapshot" && "$1" != "staging" && "$1" != "release" ]] && { usage; exit 1; }
 type="$1"
 
 [[ "$2" ]] || { usage; exit 1; }
@@ -42,7 +42,7 @@ info "Building $app $version $type build for Android (Country: $country)"
 info "Package ID: $package"
 have "android" || error "Android SDK required"
 
-if [[ "$type" == "release" ]]; then
+if [[ "$type" != "snapshot" ]]; then
   [[ -d "$keys" ]] || error "Add android-release keys to $keys and try again"
 fi
 
@@ -80,7 +80,7 @@ else
 fi
 
 
-if [[ "$type" == "release" ]]; then
+if [[ "$type" != "snapshot" ]]; then
   cp "$keys/android-release-keys.properties" "$build/$app/platforms/android/release-signing.properties"
   cp "$keys/ehealth.keystore" "$build/$app/platforms/android/ehealth.keystore"
 fi
@@ -90,7 +90,7 @@ cd "$build/$app"
 export BUILD_MULTIPLE_APKS=true
 
 buildcmd="$cordova build android"
-[[ $type == "release" ]] && buildcmd+=" --release" || buildcmd+=" --debug"
+[[ $type == "snapshot" ]] && buildcmd+=" --debug" || buildcmd+=" --release"
 $buildcmd
 
 [[ "$type" == "snapshot" ]] && releasetype="debug" || releasetype="release"

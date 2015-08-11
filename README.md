@@ -84,6 +84,8 @@ if [[ "$TRAVIS_TAG" ]]; then
   BUILD_STAGE="release"
 elif [[ "$TRAVIS_BRANCH" == "develop" ]]; then
   BUILD_STAGE="snapshot"
+elif [[ "$TRAVIS_BRANCH" == "staging" ]]; then
+  BUILD_STAGE="staging"
 else
   skip "Unsupported branch $TRAVIS_BRANCH and/or untagged commit"
 fi
