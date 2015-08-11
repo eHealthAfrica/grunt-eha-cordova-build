@@ -1,12 +1,10 @@
 {
   "name": "grunt-eha-cordova-build",
-  "version": "0.0.0-semantically-released",
   "description": "Builds Sense Apps via Cordova",
   "main": "index.js",
   "scripts": {
     "test": "echo the grass so little has to do",
-    "prepublish": "semantic-release pre",
-    "postpublish": "semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -15,7 +13,7 @@
     "cordova-android": "^4.0.0"
   },
   "devDependencies": {
-    "semantic-release": "^3.4.1"
+    "semantic-release": "^4.0.3"
   },
   "repository": {
     "type": "git",
