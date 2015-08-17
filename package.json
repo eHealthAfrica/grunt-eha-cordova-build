@@ -6,7 +6,11 @@
     "test": "echo the grass so little has to do",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "author": "",
+  "contributors": [
+    "Tom Vincent <tom.vincent@ehealthnigeria.org>",
+    "Karl Westin <karl.westin@ehealthnigeria.org>",
+    "Robin Mehner <robin.mehner@ehealthnigeria.org>"
+  ],
   "license": "Apache-2.0",
   "dependencies": {
     "cordova": "^5.0.0",
@@ -18,5 +22,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/eHealthAfrica/grunt-eha-cordova-build"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/eHealthAfrica/grunt-eha-cordova-build/issues"
+  },
+  "homepage": "https://github.com/eHealthAfrica/grunt-eha-cordova-build",
+  "keywords": [
+    "grunt",
+    "cordova",
+    "build"
+  ]
 }
