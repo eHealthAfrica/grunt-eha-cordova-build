@@ -13,7 +13,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "cordova": "^5.0.0",
+    "cordova": "5.1.1",
     "cordova-android": "^4.0.0"
   },
   "devDependencies": {
