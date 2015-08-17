@@ -43,7 +43,9 @@ info "Package ID: $package"
 have "android" || error "Android SDK required"
 
 if [[ "$type" != "snapshot" ]]; then
-  [[ -d "$keys" ]] || error "Add android-release keys to $keys and try again"
+  if ! [[ -f "$keys/android-release-keys.properties" && -f "$keys/ehealth.keystore" ]]; then
+    error "Add android-release keys to $keys and try again"
+  fi
 fi
 
 if [[ $skipcreate == false ]]; then
