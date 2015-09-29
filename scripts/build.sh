@@ -9,7 +9,7 @@ gruntcmd="$COMMAND"
 version="$VERSION"
 
 scriptdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-cordova="$scriptdir/../node_modules/.bin/cordova"
+
 keys="$pwd/.android"
 build="$pwd/build"
 apks="$build/$app/platforms/android/build/outputs/apk"
@@ -18,6 +18,14 @@ have() { command -v "$1" >/dev/null; }
 info() { echo "$0: $1"; }
 error() { info "$1"; exit 1; }
 usage() { echo "usage: $0 snapshot|staging|release country (optional rebuild)"; }
+
+if [[ -f "$scriptdir/../node_modules/.bin/cordova" ]]; then
+  cordova="$scriptdir/../node_modules/.bin/cordova"
+elif [[ -f "$pwd/node_modules/.bin/cordova" ]]; then
+  cordova="$pwd/node_modules/.bin/cordova"
+else
+  error "Cannot find cordova binary in node_modules. Did you run npm install?"
+fi
 
 [[ "$1" ]] || { usage; exit 1; }
 [[ "$1" == "--help" || "$1" == "-h" ]] && { usage; exit; }
