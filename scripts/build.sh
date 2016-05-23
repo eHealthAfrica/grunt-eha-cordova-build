@@ -89,6 +89,9 @@ else
   fi
 fi
 
+if [[ -e "$pwd/build-extras.gradle" ]]; then
+  cp "$pwd/build-extras.gradle" "$build/$app/platforms/android"
+fi
 
 if [[ "$type" != "snapshot" ]]; then
   cp "$keys/android-release-keys.properties" "$build/$app/platforms/android/release-signing.properties"
